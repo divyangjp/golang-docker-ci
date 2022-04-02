@@ -15,7 +15,7 @@ type handler struct {
 }
 
 func (h handler) health(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)
+	w.WriteHeader(200)
 }
 
 func (h handler) token(w http.ResponseWriter, r *http.Request) {
