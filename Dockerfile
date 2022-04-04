@@ -1,8 +1,8 @@
 FROM golang:1.17 as base
 
 WORKDIR /go/src/app
-COPY *.go .
-COPY go.* .
+COPY *.go ./
+COPY go.* ./
 
 RUN go mod download
 RUN go get -d -v ./...

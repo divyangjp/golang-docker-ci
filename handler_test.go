@@ -3,7 +3,7 @@ package main
 import (
 	"crypto/hmac"
 	"crypto/sha1"
-	"encoding/hex"
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -24,7 +24,10 @@ func TestToken(t *testing.T) {
 	h.token(rec, req)
 
 	mac := createMAC([]byte(body), h.key)
-	actual, _ := hex.DecodeString(rec.Body.String())
+
+	var actual []byte
+	dec := json.NewDecoder(rec.Body)
+	dec.Decode(&actual)
 
 	if !hmac.Equal(actual, mac) {
 		t.Errorf("failed to validate hmac")

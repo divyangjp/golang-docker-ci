@@ -4,7 +4,6 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -24,7 +23,9 @@ func (h handler) token(w http.ResponseWriter, r *http.Request) {
 
 	body, _ := io.ReadAll(r.Body)
 	out := createMAC(body, h.key)
-	fmt.Fprintf(w, "%x", out)
+
+	enc := json.NewEncoder(w)
+	enc.Encode(out)
 
 	w.WriteHeader(201)
 }

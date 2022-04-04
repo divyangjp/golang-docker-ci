@@ -1,0 +1,10 @@
+version: "3"
+services:
+  otc:
+    build:
+      context: .
+    image: otc-app:latest
+    ports:
+      - 8080:8080
+    environment:
+      SECRET: ${SECRET_KEY}
