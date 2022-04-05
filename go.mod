@@ -1,3 +1,3 @@
-module github.com/myob-ops/ops-tech-challenge
+module github.com/divyangjp/golang-docker-ci
 
 go 1.16
