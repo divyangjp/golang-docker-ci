@@ -1,4 +1,5 @@
 BINARY_NAME=otc-app
+SECRETKEY=""
 
 build:
 	CGO_ENABLED=0 go build -ldflags="-w -s" -o ${BINARY_NAME} .
@@ -8,7 +9,7 @@ build-docker-compose:
 	docker-compose build
 
 run-docker-compose:
-	docker-compose up -d
+	SECRET_KEY=$(SECRETKEY) docker-compose up -d
 
 stop-docker-compose:
 	docker-compose down
