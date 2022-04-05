@@ -19,6 +19,7 @@ func (h handler) health(w http.ResponseWriter, _ *http.Request) {
 
 func (h handler) token(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	h.stats["requests"] += 1
 
 	body, _ := io.ReadAll(r.Body)
@@ -26,15 +27,13 @@ func (h handler) token(w http.ResponseWriter, r *http.Request) {
 
 	enc := json.NewEncoder(w)
 	enc.Encode(out)
-
-	w.WriteHeader(201)
 }
 
 func (h handler) metrics(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	enc := json.NewEncoder(w)
 	enc.Encode(h.stats)
-	w.WriteHeader(201)
 }
 
 func createMAC(message, key []byte) []byte {
